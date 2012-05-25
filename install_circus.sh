@@ -26,8 +26,8 @@ then
   echo "Directory /usr/local/zeromq already exists!"
 else
   url=http://download.zeromq.org/zeromq-2.2.0.tar.gz
-  tarfile=${url##*/}        # strip off the part before the last slash
-  dir=${tarfile%.tar.gz}    # strip off ".tar.gz"
+  tarfile=${url##*/}
+  dir=${tarfile%.tar.gz}
 
   cd /tmp/
   wget -q "$url"

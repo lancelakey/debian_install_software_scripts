@@ -23,8 +23,8 @@ then
   echo "Directory /usr/local/redis already exists!"
 else
   url=http://download.redis.io/redis-stable.tar.gz
-  tarfile=${url##*/}        # strip off the part before the last slash
-  dir=${tarfile%.tar.gz}    # strip off ".tar.gz"
+  tarfile=${url##*/}
+  dir=${tarfile%.tar.gz}
 
   cd /tmp/
   wget -q "$url"
