@@ -2,12 +2,13 @@
 
 # Install Mozilla Circus
 
-apt-get -q -y install build-essential curl git uuid-dev python-dev python-setuptools python-nose python-profiler
+apt-get -q -y update
+apt-get -q -y install build-essential wget git uuid-dev python-dev python-setuptools python-pip
 
 
-if [ -f /usr/lib/libzmq.so ]
+if [[ `whereis -b libzmq` =~ 'libzmq.so' ]]
 then
-  echo "File /usr/lib/libzmq.so already exist"
+  echo "whereis indicates zeromq is already installed"
 else
   url=http://download.zeromq.org/zeromq-2.2.0.tar.gz
   tarfile=${url##*/}
@@ -24,9 +25,9 @@ else
 fi
 
 
-if [ -d /usr/local/lib/python2.7/dist-packages/pyzmq-2.2.0-py2.7-linux-x86_64.egg ]
+if [[ `pip freeze | grep -i pyzmq` =~ 'pyzmq' ]]
 then
-  echo "File /usr/local/pyzmq-2.2.0 already exists"
+  echo "pip freeze indicates pyzmq is already installed"
 else
   url=https://github.com/downloads/zeromq/pyzmq/pyzmq-2.2.0.tar.gz
   tarfile=${url##*/}
@@ -41,9 +42,9 @@ else
 fi
 
 
-if [ -d /usr/local/circus ]
+if [[ `pip freeze | grep -i circus` =~ 'circus' ]]
 then
-  echo "Directory /usr/local/circus already exists!"
+  echo "pip freeze indicates circus is already installed"
 else
   cd /usr/local/
   git clone https://github.com/mozilla-services/circus.git
