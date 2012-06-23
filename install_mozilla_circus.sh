@@ -2,28 +2,12 @@
 
 # Install Mozilla Circus
 
-
-apt-get update
-# for some reason if uninstalled querying for python-dev still exits 0 so i have to install it manually
-apt-get -y install python-dev
-
-PACKAGES=( build-essential curl git uuid-dev python-dev python-setuptools python-nose python-profiler )
-
-for PACKAGE in "${PACKAGES[@]}"
-do
-  if dpkg-query -W --showformat='${Status}\n' $PACKAGE
-  then
-    echo $PACKAGE is already installed.
-  else
-    echo $PACKAGE was not already installed. Installing $PACKAGE:
-    apt-get -y install $PACKAGE
-  fi
-done
+apt-get -q -y install build-essential curl git uuid-dev python-dev python-setuptools python-nose python-profiler
 
 
-if [ -d /usr/local/zeromq* ]
+if [ -f /usr/lib/libzmq.so ]
 then
-  echo "Directory /usr/local/zeromq already exists!"
+  echo "File /usr/lib/libzmq.so already exist"
 else
   url=http://download.zeromq.org/zeromq-2.2.0.tar.gz
   tarfile=${url##*/}
@@ -40,9 +24,9 @@ else
 fi
 
 
-if [ -d /usr/local/pyzmq* ]
+if [ -d /usr/local/lib/python2.7/dist-packages/pyzmq-2.2.0-py2.7-linux-x86_64.egg ]
 then
-  echo "Directory /usr/local/pyzmq already exists!"
+  echo "File /usr/local/pyzmq-2.2.0 already exists"
 else
   url=https://github.com/downloads/zeromq/pyzmq/pyzmq-2.2.0.tar.gz
   tarfile=${url##*/}
@@ -57,7 +41,7 @@ else
 fi
 
 
-if [ -d /usr/local/circus* ]
+if [ -d /usr/local/circus ]
 then
   echo "Directory /usr/local/circus already exists!"
 else
